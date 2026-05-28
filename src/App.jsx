@@ -136,8 +136,7 @@ const navLinks = [
   { href: '#projects', label: 'Projects' },
   { href: '#education', label: 'Education' },
   { href: '#certifications', label: 'Certifications' },
-  { href: '#contact', label: 'Contact' },
-  { href: 'https://github.com/shawsumeet1', label: 'GitHub', external: true }
+  { href: '#contact', label: 'Contact' }
 ];
 
 function App() {
@@ -239,7 +238,6 @@ function App() {
           <div className="hero-actions">
             <a href="mailto:shawsumeet1@gmail.com" className="button button-primary">Email Me</a>
             <a href="https://www.linkedin.com/in/shawsumeet1/" className="button button-secondary" target="_blank" rel="noreferrer">LinkedIn</a>
-            <a href="https://github.com/shawsumeet1" className="button button-secondary" target="_blank" rel="noreferrer">GitHub</a>
           </div>
 
           <div className="hero-stats" ref={heroStatsRef}>
@@ -396,6 +394,10 @@ function App() {
                 <p><a href="mailto:shawsumeet1@gmail.com">shawsumeet1@gmail.com</a></p>
               </div>
               <div>
+                <strong>Phone</strong>
+                <p><a href="tel:+918293846393">+91-8293846393</a></p>
+              </div>
+              <div>
                 <strong>Location</strong>
                 <p>Hyderabad, Telangana, India</p>
               </div>
@@ -403,10 +405,15 @@ function App() {
                 <strong>LinkedIn</strong>
                 <p><a href="https://www.linkedin.com/in/shawsumeet1/" target="_blank" rel="noreferrer">linkedin.com/in/shawsumeet1</a></p>
               </div>
+              <div>
+                <strong>GitHub</strong>
+                <p><a href="https://github.com/shawsumeet1" target="_blank" rel="noreferrer">github.com/shawsumeet1</a></p>
+              </div>
             </div>
             <div className="contact-links">
               <a href="mailto:shawsumeet1@gmail.com" className="button button-primary">Email</a>
               <a href="https://www.linkedin.com/in/shawsumeet1/" className="button button-secondary" target="_blank" rel="noreferrer">LinkedIn</a>
+              <a href="https://github.com/shawsumeet1" className="button button-secondary" target="_blank" rel="noreferrer">GitHub</a>
             </div>
           </div>
         </section>
