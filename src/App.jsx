@@ -220,6 +220,7 @@ function App() {
               href={link.href}
               target={link.external ? '_blank' : undefined}
               rel={link.external ? 'noreferrer' : undefined}
+              onClick={() => setMenuOpen(false)}
             >
               {link.label}
             </a>

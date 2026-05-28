@@ -51,7 +51,6 @@ textarea {
   z-index: 10;
   background: rgba(2, 6, 24, 0.72);
   backdrop-filter: blur(18px);
-  flex-wrap: wrap;
 }
 
 .nav-toggle {
@@ -557,17 +556,29 @@ textarea {
   }
 
   .site-header {
-    flex-direction: column;
-    align-items: flex-start;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: center;
   }
 
   .nav-toggle {
     display: inline-flex;
+    margin-left: auto;
   }
 
   .site-nav {
     display: none;
-    justify-content: flex-start;
+    position: absolute;
+    top: 74px;
+    right: 18px;
+    width: min(280px, calc(100% - 36px));
+    background: rgba(2, 6, 24, 0.96);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 22px;
+    padding: 18px 16px;
+    flex-direction: column;
+    gap: 14px;
+    box-shadow: 0 28px 60px rgba(0, 0, 0, 0.28);
   }
 
   .site-nav.is-open {
