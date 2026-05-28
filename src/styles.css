@@ -54,6 +54,96 @@ textarea {
   flex-wrap: wrap;
 }
 
+.nav-toggle {
+  display: none;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.04);
+  width: 46px;
+  height: 46px;
+  border-radius: 16px;
+  cursor: pointer;
+  padding: 0;
+  align-items: center;
+  justify-content: center;
+}
+
+.nav-toggle span {
+  display: block;
+  width: 20px;
+  height: 2px;
+  border-radius: 999px;
+  background: #d7e0ff;
+  position: relative;
+  transition: transform 0.25s ease, opacity 0.25s ease;
+}
+
+.nav-toggle span + span {
+  margin-top: 6px;
+}
+
+.nav-toggle.is-active span:first-of-type {
+  transform: translateY(8px) rotate(45deg);
+}
+
+.nav-toggle.is-active span:nth-of-type(2) {
+  opacity: 0;
+}
+
+.nav-toggle.is-active span:last-of-type {
+  transform: translateY(-8px) rotate(-45deg);
+}
+
+.site-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  align-items: center;
+}
+
+.site-nav a {
+  color: #9bbfff;
+  font-size: 0.95rem;
+  transition: color 0.2s ease;
+}
+
+.site-nav a:hover {
+  color: #ffffff;
+}
+
+.site-nav.is-open {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+  padding: 16px 0 0;
+}
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 14px 22px;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  font-weight: 700;
+  transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+}
+
+.button:hover {
+  transform: translateY(-1px);
+}
+
+.button-primary {
+  background: linear-gradient(135deg, #2da8ff, #1f6cff);
+  color: #ffffff;
+}
+
+.button-secondary {
+  background: rgba(255, 255, 255, 0.06);
+  color: #dbe7ff;
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
 .brand-mark {
   display: inline-flex;
   align-items: center;
@@ -471,8 +561,22 @@ textarea {
     align-items: flex-start;
   }
 
+  .nav-toggle {
+    display: inline-flex;
+  }
+
   .site-nav {
+    display: none;
     justify-content: flex-start;
+  }
+
+  .site-nav.is-open {
+    display: flex;
+  }
+
+  .site-nav a {
+    width: 100%;
+    padding: 10px 0;
   }
 
   .hero-stats,

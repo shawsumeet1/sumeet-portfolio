@@ -129,9 +129,21 @@ const education = [
   }
 ];
 
+const navLinks = [
+  { href: '#about', label: 'About' },
+  { href: '#experience', label: 'Experience' },
+  { href: '#skills', label: 'Skills' },
+  { href: '#projects', label: 'Projects' },
+  { href: '#education', label: 'Education' },
+  { href: '#certifications', label: 'Certifications' },
+  { href: '#contact', label: 'Contact' },
+  { href: 'https://github.com/shawsumeet1', label: 'GitHub', external: true }
+];
+
 function App() {
   const [counts, setCounts] = useState(Array(impactMetrics.length).fill(0));
   const [hasAnimated, setHasAnimated] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
   const heroStatsRef = useRef(null);
   const animationFrames = useRef({});
 
@@ -191,14 +203,28 @@ function App() {
     <div className="page-shell">
       <header className="site-header">
         <div className="brand-mark">SK</div>
-        <nav className="site-nav">
-          <a href="#about">About</a>
-          <a href="#experience">Experience</a>
-          <a href="#skills">Skills</a>
-          <a href="#projects">Projects</a>
-          <a href="#education">Education</a>
-          <a href="#certifications">Certifications</a>
-          <a href="#contact">Contact</a>
+        <button
+          className={`nav-toggle ${menuOpen ? 'is-active' : ''}`}
+          type="button"
+          aria-expanded={menuOpen}
+          aria-label="Toggle navigation"
+          onClick={() => setMenuOpen((open) => !open)}
+        >
+          <span />
+          <span />
+          <span />
+        </button>
+        <nav className={`site-nav ${menuOpen ? 'is-open' : ''}`}>
+          {navLinks.map((link) => (
+            <a
+              key={link.label}
+              href={link.href}
+              target={link.external ? '_blank' : undefined}
+              rel={link.external ? 'noreferrer' : undefined}
+            >
+              {link.label}
+            </a>
+          ))}
         </nav>
       </header>
 
@@ -213,6 +239,7 @@ function App() {
           <div className="hero-actions">
             <a href="mailto:shawsumeet1@gmail.com" className="button button-primary">Email Me</a>
             <a href="https://www.linkedin.com/in/shawsumeet1/" className="button button-secondary" target="_blank" rel="noreferrer">LinkedIn</a>
+            <a href="https://github.com/shawsumeet1" className="button button-secondary" target="_blank" rel="noreferrer">GitHub</a>
           </div>
 
           <div className="hero-stats" ref={heroStatsRef}>
