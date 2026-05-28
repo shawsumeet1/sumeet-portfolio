@@ -198,6 +198,42 @@ function App() {
     };
   }, [hasAnimated]);
 
+  // Per-anchor navigation handler: close drawer and scroll with header offset
+  const headerHeight = () => document.querySelector('.site-header')?.offsetHeight || 96;
+
+  const handleNavClick = (e, href) => {
+    if (e && e.preventDefault) e.preventDefault();
+    const id = href.slice(1);
+    const el = document.getElementById(id);
+    if (el) {
+      const offset = headerHeight();
+      const absoluteTop = el.getBoundingClientRect().top + window.scrollY;
+      // Close drawer first, then scroll after the CSS transition finishes to avoid layout shift
+      setMenuOpen(false);
+      const waitMs = 340; // slightly longer than the CSS transition (280ms)
+      setTimeout(() => {
+        window.scrollTo({ top: absoluteTop - offset, behavior: 'smooth' });
+      }, waitMs);
+      history.replaceState(null, '', href);
+    } else {
+      setMenuOpen(false);
+    }
+  };
+
+  useEffect(() => {
+    const onHashChange = () => {
+      const id = location.hash.slice(1);
+      const el = document.getElementById(id);
+      if (el) {
+        const offset = headerHeight();
+        const absoluteTop = el.getBoundingClientRect().top + window.scrollY;
+        window.scrollTo({ top: absoluteTop - offset });
+      }
+    };
+    window.addEventListener('hashchange', onHashChange);
+    return () => window.removeEventListener('hashchange', onHashChange);
+  }, []);
+
   return (
     <div className="page-shell">
       <header className="site-header">
@@ -214,19 +250,21 @@ function App() {
           <span />
         </button>
         <nav className={`site-nav ${menuOpen ? 'is-open' : ''}`}>
+          <button className="nav-close" aria-label="Close menu" onClick={() => setMenuOpen(false)}>×</button>
           {navLinks.map((link) => (
             <a
               key={link.label}
               href={link.href}
               target={link.external ? '_blank' : undefined}
               rel={link.external ? 'noreferrer' : undefined}
-              onClick={() => setMenuOpen(false)}
+              onClick={(e) => handleNavClick(e, link.href)}
             >
               {link.label}
             </a>
           ))}
         </nav>
       </header>
+      <div className={`nav-overlay ${menuOpen ? 'is-visible' : ''}`} onClick={() => setMenuOpen(false)} />
 
       <header className="hero-section">
         <div className="hero-copy">
@@ -300,7 +338,7 @@ function App() {
           </div>
           <div className="timeline">
             {experience.map((item) => (
-              <article key={item.company} className="timeline-item">
+              <article key={`${item.company}-${item.timeframe}`} className="timeline-item">
                 <div className="timeline-marker" />
                 <div>
                   <h3>{item.role}</h3>

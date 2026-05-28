@@ -48,13 +48,15 @@ textarea {
   padding: 16px 0;
   position: sticky;
   top: 0;
-  z-index: 10;
+  z-index: 20;
   background: rgba(2, 6, 24, 0.72);
   backdrop-filter: blur(18px);
+  width: 100%;
 }
 
 .nav-toggle {
   display: none;
+  position: relative;
   border: 1px solid rgba(255, 255, 255, 0.12);
   background: rgba(255, 255, 255, 0.04);
   width: 46px;
@@ -62,6 +64,8 @@ textarea {
   border-radius: 16px;
   cursor: pointer;
   padding: 0;
+  flex-direction: column;
+  gap: 6px;
   align-items: center;
   justify-content: center;
 }
@@ -76,9 +80,6 @@ textarea {
   transition: transform 0.25s ease, opacity 0.25s ease;
 }
 
-.nav-toggle span + span {
-  margin-top: 6px;
-}
 
 .nav-toggle.is-active span:first-of-type {
   transform: translateY(8px) rotate(45deg);
@@ -301,6 +302,11 @@ textarea {
 .section {
   padding: 16px 0;
   border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* Ensure anchor targets sit below the sticky header */
+.section, .hero-section {
+  scroll-margin-top: 96px;
 }
 
 .section:first-of-type {
@@ -559,35 +565,73 @@ textarea {
     flex-wrap: nowrap;
     justify-content: space-between;
     align-items: center;
+    position: relative;
   }
 
   .nav-toggle {
-    display: inline-flex;
-    margin-left: auto;
+    display: flex;
+    position: absolute;
+    right: 18px;
+    top: 50%;
+    transform: translateY(-50%);
+    margin-left: 0;
   }
 
   .site-nav {
-    display: none;
-    position: absolute;
-    top: 74px;
-    right: 18px;
-    width: min(280px, calc(100% - 36px));
-    background: rgba(2, 6, 24, 0.96);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 22px;
-    padding: 18px 16px;
+    display: flex;
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: 100vh;
+    width: min(280px, calc(100% - 28px));
+    max-width: 280px;
+    transform: translateX(100%);
+    background: rgba(5, 10, 25, 0.98);
+    border-left: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 80px 20px 24px;
     flex-direction: column;
-    gap: 14px;
-    box-shadow: 0 28px 60px rgba(0, 0, 0, 0.28);
+    gap: 18px;
+    box-shadow: -18px 0 60px rgba(0, 0, 0, 0.28);
+    z-index: 30;
+    transition: transform 0.28s ease;
   }
 
   .site-nav.is-open {
-    display: flex;
+    transform: translateX(0);
   }
 
   .site-nav a {
     width: 100%;
-    padding: 10px 0;
+    padding: 14px 0;
+  }
+
+  .nav-close {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.06);
+    color: #dbe7ff;
+    font-size: 20px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+  }
+
+  .nav-overlay {
+    display: none;
+  }
+
+  .nav-overlay.is-visible {
+    display: block;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.35);
+    z-index: 24;
   }
 
   .hero-stats,
